@@ -48,14 +48,12 @@ def read_and_update_note_views(
     db_note = db.query(models.Note).filter(models.Note.slug == slug).first()
     if db_note is None:
         raise NoteNotFoundException(slug)
-    if db_note.is_expired():
+    elif db_note.is_expired():
         raise NoteExpiredException()
-    if db_note.has_reached_view_limit():
+    elif db_note.has_reached_view_limit():
         raise NoteViewLimitReachedException()
-    if (
-        db_note.password is not None
-        and password is not None
-        and not verify_password(password, db_note.password)
+    elif db_note.password is not None and (
+        password is None or not verify_password(password, db_note.password)
     ):
         raise PasswordMismatchException()
     db_note.views += 1
