@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from notamoo import schemas, crud
 from notamoo.database import get_db
 
-router = APIRouter(prefix='/notes')
+router = APIRouter()
 
 
 @router.post('/', response_model=schemas.NoteRead)

@@ -17,9 +17,9 @@ app = FastAPI(
     title='Notamoo',
     summary='Leave special notes for special people!',
     version='v1',
-    docs_url='/docs/swagger',
-    redoc_url='/docs/redoc',
+    docs_url='/api/docs/swagger',
+    redoc_url='/api/docs/redoc',
     lifespan=lifespan,
 )
 
-app.include_router(notes.router)
+app.include_router(notes.router, prefix='/api/notes', tags=['Notes'])
