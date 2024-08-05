@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field, ConfigDict, field_validator
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class NoteBase(BaseModel):
@@ -12,14 +12,10 @@ class NoteBase(BaseModel):
     view_limit: Optional[int] = Field(
         None, ge=1, description='Number of times the note can be viewed.'
     )
-    expires_at: Optional[str] = Field(
+    expires_at: Optional[datetime] = Field(
         None,
-        description='Expiration date and time for the note in the format `YYYY-MM-DDTHH:MM`.',
+        description='Expiration date and time for the note (e.g. 2030-01-01T12:30:00).',
     )
-
-    @field_validator('expires_at')
-    def validate_expires_at(cls, v: str | None) -> Optional[datetime]:
-        return datetime.strptime(v, '%Y-%m-%dT%H:%M') if v is not None else v
 
 
 class NoteCreate(NoteBase):
