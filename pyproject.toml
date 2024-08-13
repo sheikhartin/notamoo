@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "notamoo"
-version = "0.1.0"
+version = "0.1.1"
 description = "Leave special notes for special people!"
 authors = ["Artin Mohammadi <sheikhartin@gmail.com>"]
 license = "MIT"
