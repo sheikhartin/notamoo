@@ -1,6 +1,4 @@
-from typing import Optional
-
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Header
 from sqlalchemy.orm import Session
 
 from notamoo import schemas, crud
@@ -17,7 +15,7 @@ async def create_note(note: schemas.NoteCreate, db: Session = Depends(get_db)):
 @router.get('/{slug}', response_model=schemas.NoteRead)
 async def read_note(
     slug: str,
-    password: Optional[str] = None,
+    password: str = Header(None),
     db: Session = Depends(get_db),
 ):
     return crud.read_and_update_note_views(db=db, slug=slug, password=password)
